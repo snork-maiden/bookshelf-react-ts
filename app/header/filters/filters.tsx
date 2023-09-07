@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import SearchFilter from "./searchFilter/searchFilter";
 import styles from "/filters.module.css";
@@ -16,6 +17,8 @@ const categoryOptions: Array<string> = [
   "medical",
   "poetry",
 ];
+
+
 const sortByOptions: Array<string> = ["relevance", "newest"];
 
 export default function Filters() {

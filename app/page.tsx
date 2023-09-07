@@ -1,6 +1,7 @@
-import Image from "next/image";
+"use client";
 import styles from "./page.module.css";
 import Header from "./header/header";
+import BookCard from "./bookCard/bookCard";
 
 export default function Home() {
   return (
@@ -11,14 +12,7 @@ export default function Home() {
         <p className="search-results">Found number results</p>
         <ul className="books-list">
           <li className="books-item">
-            <a href="" className="books-link">
-              <article className="book">
-                <Image src="" alt="" className="cover" />
-                <p className="category"></p>
-                <h3 className="title"></h3>
-                <p className="author"></p>
-              </article>
-            </a>
+            <BookCard />
           </li>
         </ul>
       </main>

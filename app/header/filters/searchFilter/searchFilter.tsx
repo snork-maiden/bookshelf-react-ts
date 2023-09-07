@@ -1,9 +1,9 @@
-import styles from "/searchFilter.module.css";
+import styles from "./searchFilter.module.css";
 
 interface SearchFilterProps {
   label: string;
   options: string[];
-  onChange: (name:string, value: string) => void;
+  onChange: (name: string, value: string) => void;
 }
 
 export default function SearchFilter({
@@ -19,9 +19,10 @@ export default function SearchFilter({
         id={label}
         className={styles.select}
         onChange={(e) => onChange(label, e.target.value)}
+        defaultValue={options[0]}
       >
         {options.map((option, index) => (
-          <option key={option} value={option} selected={index === 0}>
+          <option key={option} value={option}>
             {option}
           </option>
         ))}
