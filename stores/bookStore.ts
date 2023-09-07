@@ -1,4 +1,4 @@
-import { BooksList } from "@/utils/googleBooks/interfaces";
+import { BookData, BooksList } from "@/utils/googleBooks/interfaces";
 import { makeAutoObservable } from "mobx";
 
 class BookStore {
@@ -9,6 +9,12 @@ class BookStore {
 
   setBooks(data: BooksList) {
     this.books = data;
+  }
+  get booksAmount(): number {
+    return this.books?.totalItems || 0;
+  }
+  get booksList(): Array<BookData> {
+    return this.books?.items || [];
   }
 }
 

@@ -1,5 +1,9 @@
 import Image from "next/image";
 import styles from "./bookCard.module.css";
+import bookStore from "@/stores/bookStore";
+
+const BooksList = bookStore.books?.items;
+
 
 export default function BookCard() {
   return (
@@ -13,3 +17,5 @@ export default function BookCard() {
   </article>
   );
 }
+
+
