@@ -1,4 +1,4 @@
-import { fetchGoogleBooks } from "@/utils/googleBooks";
+import { searchGoogleBooks } from "@/utils/googleBooks";
 import Filters from "./filters/filters";
 import styles from "./header.module.css";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export default function Header() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let data = await fetchGoogleBooks(searchTerm);
+    let data = await searchGoogleBooks(searchTerm);
     console.log(data)
     bookStore.setBooks(data);
   };

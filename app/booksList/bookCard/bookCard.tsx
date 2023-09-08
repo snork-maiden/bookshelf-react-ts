@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import styles from "./bookCard.module.css";
 import { BookData } from "@/utils/googleBooks/interfaces";
 
@@ -9,7 +9,7 @@ export default function BookCard({ bookData }: { bookData: BookData }) {
     bookData.volumeInfo?.imageLinks?.smallThumbnail;
   return (
     <article className={styles.book}>
-      <a href="" className={styles.booksLink}>
+      <Link href={"/" + bookData.id} className={styles.booksLink}>
         {findImageURL && (
           <img
             src={findImageURL}
@@ -30,7 +30,7 @@ export default function BookCard({ bookData }: { bookData: BookData }) {
             {bookData.volumeInfo.authors.join(", ")}
           </p>
         )}
-      </a>
+      </Link>
     </article>
   );
 }
