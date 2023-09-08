@@ -10,8 +10,8 @@ class BookStore {
   setBooks(data: BooksList) {
     this.books = data;
   }
-  get booksAmount(): number {
-    return this.books?.totalItems || 0;
+  get booksAmount(): number | null {
+    return this.books?.totalItems ?? null;
   }
   get booksList(): Array<BookData> {
     return this.books?.items || [];

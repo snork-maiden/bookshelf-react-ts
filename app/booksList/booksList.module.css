@@ -1,0 +1,24 @@
+@keyframes preloader {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  50% {
+    transform: rotate(360deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(720deg) scale(0.8);
+  }
+}
+
+.loadingRing {
+  animation: 3s infinite linear preloader;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: 10px solid var(--accent-color);
+  border-radius: 50%;
+  border-left-color: transparent;
+  margin-top: 20vh;
+}
