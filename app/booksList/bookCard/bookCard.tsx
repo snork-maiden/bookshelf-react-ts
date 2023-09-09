@@ -3,16 +3,16 @@ import styles from "./bookCard.module.css";
 import { BookData } from "@/utils/googleBooks/interfaces";
 
 export default function BookCard({ bookData }: { bookData: BookData }) {
-  const findImageURL =
+  const imageURL =
     bookData.volumeInfo?.imageLinks?.small ||
     bookData.volumeInfo?.imageLinks?.thumbnail ||
     bookData.volumeInfo?.imageLinks?.smallThumbnail;
   return (
     <article className={styles.book}>
       <Link href={"/" + bookData.id} className={styles.booksLink}>
-        {findImageURL && (
+        {imageURL && (
           <img
-            src={findImageURL}
+            src={imageURL}
             alt={bookData.volumeInfo.title}
             className={styles.cover}
           />
