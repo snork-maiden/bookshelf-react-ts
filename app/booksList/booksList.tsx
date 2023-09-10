@@ -1,9 +1,13 @@
 import bookStore from "@/stores/bookStore";
 import BookCard from "./bookCard/bookCard";
 import styles from "./booksList.module.css";
+import searchParamsStore from "@/stores/searchParamsStore";
 
 export default function BooksList() {
-  const ifLoadMore = bookStore.booksAmount||0 > bookStore.booksList.length;
+  const ifLoadMore = bookStore.booksAmount || 0 > bookStore.booksList.length;
+  function handleChange() {
+    searchParamsStore.increasePageNumber();
+  }
   return (
     <>
       <ul className={styles.booksList}>
@@ -13,9 +17,7 @@ export default function BooksList() {
           </li>
         ))}
       </ul>
-      {ifLoadMore && (
-        <button>Load more</button>
-      )}
+      {ifLoadMore && <button onClick={handleChange}>Load more</button>}
     </>
   );
 }

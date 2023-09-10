@@ -4,7 +4,17 @@ import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import Header from "./header/header";
 
-const sourceSans = Source_Sans_3({ subsets: ["latin"] });
+const sourceSans = Source_Sans_3({
+  subsets: [
+    "cyrillic",
+    "cyrillic-ext",
+    "greek",
+    "greek-ext",
+    "latin",
+    "latin-ext",
+    "vietnamese",
+  ],
+});
 
 export const metadata: Metadata = {
   title: "Books search",

@@ -4,6 +4,7 @@ import styles from "./header.module.css";
 import { useEffect, useState } from "react";
 import bookStore from "@/stores/bookStore";
 import { Categories, SortByOptions } from "@/utils/googleBooks/interfaces";
+import searchParamsStore from "@/stores/searchParamsStore";
 
 export interface FilterState {
   Categories: Categories;
@@ -29,6 +30,7 @@ export default function Header() {
         searchParams["Sort by"]
       );
       bookStore.setBooks(data);
+      searchParamsStore.setParams({ ...searchParams, pageNumber: 0 });
     }
     searchBooks();
   }, [searchParams]);

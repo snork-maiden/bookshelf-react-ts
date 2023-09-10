@@ -11,17 +11,20 @@ const maxResults = "30";
 export async function searchGoogleBooks(
   searchTerm: string,
   category: Categories = "all",
-  orderBy: OrderByOptions = "relevance"
+  orderBy: OrderByOptions = "relevance",
+  page: number = 0
 ): Promise<BooksList> {
   const baseUrl = "https://www.googleapis.com/books/v1/volumes";
+  const startIndex = (+maxResults * page).toString();
   const searchSting =
     category === "all" ? searchTerm : `${searchTerm}+subject:${category}`;
-    
+
   const params = new URLSearchParams({
     q: searchSting,
     maxResults,
     orderBy: orderBy,
     key: API_KEY,
+    startIndex,
   });
   const url = `${baseUrl}?${params.toString()}`;
 
