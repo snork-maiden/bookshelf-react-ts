@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchFilter from "./searchFilter/searchFilter";
-import { Categories, SortByOptions } from "@/utils/googleBooks/interfaces";
+import { Categories, OrderByOptions } from "@/utils/googleBooks/interfaces";
 import { FilterState } from "../header";
 
 type FiltersProps = {
@@ -17,12 +17,12 @@ const categoryOptions: Array<Categories> = [
   "poetry",
 ];
 
-const sortByOptions: Array<SortByOptions> = ["relevance", "newest"];
+const sortByOptions: Array<OrderByOptions> = ["relevance", "newest"];
 
 export default function Filters({ onFiltersChange }: FiltersProps) {
   const [filters, setFilters] = useState<FilterState>({
-    Categories: "all",
-    "Sort by": "relevance",
+    category: "all",
+    orderBy: "relevance",
   });
 
   const handleFilterChange = (name: string, value: string) => {
@@ -40,13 +40,13 @@ export default function Filters({ onFiltersChange }: FiltersProps) {
       <SearchFilter
         label="Categories"
         options={categoryOptions}
-        onChange={handleFilterChange}
+        onChange={(value:string) => handleFilterChange('category', value)}
       />
 
       <SearchFilter
         label="Sort by"
         options={sortByOptions}
-        onChange={handleFilterChange}
+        onChange={(value:string) => handleFilterChange('orderBy', value)}
       />
     </>
   );

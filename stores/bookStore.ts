@@ -16,6 +16,12 @@ class BookStore {
   get booksList(): Array<BookData> {
     return this.books?.items || [];
   }
+
+  addBooks(data: BooksList) {
+    if(this.books?.items) {
+      this.books.items = [...this.books.items, ...data.items];
+    }
+  }
 }
 
 const bookStore = new BookStore();

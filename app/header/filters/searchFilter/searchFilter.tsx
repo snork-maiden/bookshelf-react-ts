@@ -3,7 +3,7 @@ import styles from "./searchFilter.module.css";
 interface SearchFilterProps {
   label: string;
   options: string[];
-  onChange: (name: string, value: string) => void;
+  onChange: (value: string) => void;
 }
 
 export default function SearchFilter({
@@ -18,7 +18,7 @@ export default function SearchFilter({
         name={label}
         id={label}
         className={styles.select}
-        onChange={(e) => onChange(label, e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         defaultValue={options[0]}
       >
         {options.map((option, index) => (

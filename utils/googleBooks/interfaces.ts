@@ -1,4 +1,9 @@
-import { type } from "os";
+export interface SearchParams {
+  searchString: string;
+  category: Categories;
+  orderBy: OrderByOptions;
+  page: number;
+}
 
 interface VolumeInfo {
   title: string;
@@ -42,4 +47,4 @@ export type Categories =
   | "medical"
   | "poetry";
 
-export type SortByOptions = "relevance" | "newest";
+export type OrderByOptions = "relevance" | "newest";

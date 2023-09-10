@@ -3,34 +3,31 @@ import Filters from "./filters/filters";
 import styles from "./header.module.css";
 import { useEffect, useState } from "react";
 import bookStore from "@/stores/bookStore";
-import { Categories, SortByOptions } from "@/utils/googleBooks/interfaces";
+import {
+  Categories,
+  OrderByOptions,
+  SearchParams,
+} from "@/utils/googleBooks/interfaces";
 import searchParamsStore from "@/stores/searchParamsStore";
 
 export interface FilterState {
-  Categories: Categories;
-  "Sort by": SortByOptions;
-}
-
-interface SearchParamsState extends FilterState {
-  searchString: string;
+  category: Categories;
+  orderBy: OrderByOptions;
 }
 
 export default function Header() {
-  const [searchParams, setSearchParams] = useState<SearchParamsState>({
-    Categories: "all",
-    "Sort by": "relevance",
+  const [searchParams, setSearchParams] = useState<SearchParams>({
+    category: "all",
+    orderBy: "relevance",
     searchString: "",
+    page: 0,
   });
   useEffect(() => {
     async function searchBooks(): Promise<void> {
       if (!searchParams.searchString) return;
-      let data = await searchGoogleBooks(
-        searchParams.searchString,
-        searchParams.Categories,
-        searchParams["Sort by"]
-      );
+      let data = await searchGoogleBooks(searchParams);
       bookStore.setBooks(data);
-      searchParamsStore.setParams({ ...searchParams, pageNumber: 0 });
+      searchParamsStore.setParams(searchParams);
     }
     searchBooks();
   }, [searchParams]);

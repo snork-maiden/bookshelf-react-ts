@@ -2,11 +2,14 @@ import bookStore from "@/stores/bookStore";
 import BookCard from "./bookCard/bookCard";
 import styles from "./booksList.module.css";
 import searchParamsStore from "@/stores/searchParamsStore";
+import { searchGoogleBooks } from "@/utils/googleBooks";
 
 export default function BooksList() {
   const ifLoadMore = bookStore.booksAmount || 0 > bookStore.booksList.length;
-  function handleChange() {
+  async function handleChange() {
     searchParamsStore.increasePageNumber();
+    let data = await searchGoogleBooks(searchParamsStore.searchParams);
+    bookStore.addBooks(data);
   }
   return (
     <>
