@@ -1,14 +1,13 @@
-
 import { useState } from "react";
 import SearchFilter from "./searchFilter/searchFilter";
-import styles from "/filters.module.css";
+import { Categories, SortByOptions } from "@/utils/googleBooks/interfaces";
+import { FilterState } from "../header";
 
-type FilterState = {
-  Categories: string;
-  "Sort by": string;
+type FiltersProps = {
+  onFiltersChange?: (filters: FilterState) => void;
 };
 
-const categoryOptions: Array<string> = [
+const categoryOptions: Array<Categories> = [
   "all",
   "art",
   "biography",
@@ -18,10 +17,9 @@ const categoryOptions: Array<string> = [
   "poetry",
 ];
 
+const sortByOptions: Array<SortByOptions> = ["relevance", "newest"];
 
-const sortByOptions: Array<string> = ["relevance", "newest"];
-
-export default function Filters() {
+export default function Filters({ onFiltersChange }: FiltersProps) {
   const [filters, setFilters] = useState<FilterState>({
     Categories: "all",
     "Sort by": "relevance",
@@ -32,9 +30,9 @@ export default function Filters() {
 
     setFilters(updatedFilters);
 
-    // Here you can "emit" the change
-    // For instance, if you want to log it:
-    console.log(updatedFilters);
+    if (onFiltersChange) {
+      onFiltersChange(updatedFilters);
+    }
   };
 
   return (

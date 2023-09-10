@@ -1,23 +1,50 @@
 import { searchGoogleBooks } from "@/utils/googleBooks";
 import Filters from "./filters/filters";
 import styles from "./header.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bookStore from "@/stores/bookStore";
+import { Categories, SortByOptions } from "@/utils/googleBooks/interfaces";
+
+export interface FilterState {
+  Categories: Categories;
+  "Sort by": SortByOptions;
+}
+
+interface SearchParamsState extends FilterState {
+  searchString: string;
+}
 
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams, setSearchParams] = useState<SearchParamsState>({
+    Categories: "all",
+    "Sort by": "relevance",
+    searchString: "",
+  });
+  useEffect(() => {
+    async function searchBooks(): Promise<void> {
+      if (!searchParams.searchString) return;
+      let data = await searchGoogleBooks(
+        searchParams.searchString,
+        searchParams.Categories,
+        searchParams["Sort by"]
+      );
+      bookStore.setBooks(data);
+    }
+    searchBooks();
+  }, [searchParams]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    setSearchParams({ ...searchParams, ...{ searchString: e.target.value } });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFiltersChange = (filters: any) => {
+    setSearchParams({ ...searchParams, ...filters });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    let data = await searchGoogleBooks(searchTerm);
-    console.log(data)
-    bookStore.setBooks(data);
   };
+
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>Search for books in Google Books</h1>
@@ -27,7 +54,7 @@ export default function Header() {
           name="search-form"
           id="search-form"
           className={styles.search}
-          value={searchTerm}
+          value={searchParams.searchString}
           onChange={handleInputChange}
           required
         />
@@ -35,7 +62,7 @@ export default function Header() {
           Search
         </button>
       </form>
-      <Filters />
+      <Filters onFiltersChange={handleFiltersChange} />
     </header>
   );
 }

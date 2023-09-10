@@ -1,3 +1,5 @@
+import { type } from "os";
+
 interface VolumeInfo {
   title: string;
   authors: string[];
@@ -30,3 +32,14 @@ export interface BooksList {
   totalItems: number;
   items: Array<BookData>;
 }
+
+export type Categories =
+  | "all"
+  | "art"
+  | "biography"
+  | "computers"
+  | "history"
+  | "medical"
+  | "poetry";
+
+export type SortByOptions = "relevance" | "newest";

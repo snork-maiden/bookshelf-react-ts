@@ -1,24 +1,27 @@
-import { BookData, BooksList } from "./interfaces";
+import {
+  BookData,
+  BooksList,
+  Categories,
+  SortByOptions as OrderByOptions,
+} from "./interfaces";
 
 const API_KEY = "AIzaSyAMtsurQidIdtm_sNnKpVeD1z5mNafzmFA";
 const maxResults = "30";
 
-interface googleBooksFetchParameters {
-  searchTerm: string;
-  category?: string;
-  sortByNewest?: boolean;
-}
-
 export async function searchGoogleBooks(
-  searchTerm: string
-  //   category: string,
+  searchTerm: string,
+  category: Categories = "all",
+  orderBy: OrderByOptions = "relevance"
 ): Promise<BooksList> {
   const baseUrl = "https://www.googleapis.com/books/v1/volumes";
-  // const searchSting =
+  const searchSting =
+    category === "all" ? searchTerm : `${searchTerm}+subject:${category}`;
+    
   const params = new URLSearchParams({
-    q: `${searchTerm}`,
-    key: API_KEY,
+    q: searchSting,
     maxResults,
+    orderBy: orderBy,
+    key: API_KEY,
   });
   const url = `${baseUrl}?${params.toString()}`;
 
