@@ -5,4 +5,5 @@
   width: fit-content;
   margin: auto;
   padding-top: 0.5em;
+  margin-bottom: min(10vh, 2.5em);
 }

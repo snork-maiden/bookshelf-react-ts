@@ -13,6 +13,7 @@
   height: 190px;
   background-color: var(--image-bg-color);
   width: 135px;
+  margin: 0.5em 0;
 }
 
 .titleWrapper {
