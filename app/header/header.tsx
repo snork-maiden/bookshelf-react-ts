@@ -9,6 +9,10 @@ import {
   SearchParams,
 } from "@/utils/googleBooks/interfaces";
 import searchParamsStore from "@/stores/searchParamsStore";
+import { Playfair_Display } from "next/font/google";
+const playfairDisplay = Playfair_Display({
+  subsets: ["cyrillic", "latin", "latin-ext", "vietnamese"],
+});
 
 export interface FilterState {
   category: Categories;
@@ -16,6 +20,7 @@ export interface FilterState {
 }
 
 export default function Header() {
+  let searchString = "";
   const [searchParams, setSearchParams] = useState<SearchParams>({
     category: "all",
     orderBy: "relevance",
@@ -33,7 +38,7 @@ export default function Header() {
   }, [searchParams]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchParams({ ...searchParams, ...{ searchString: e.target.value } });
+    searchString = e.target.value;
   };
 
   const handleFiltersChange = (filters: any) => {
@@ -41,24 +46,32 @@ export default function Header() {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setSearchParams({ ...searchParams, ...{ searchString: searchString } });
     e.preventDefault();
   };
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>Search for books in Google Books</h1>
+      <h1 className={styles.title + " " + playfairDisplay.className}>
+        Search for books in Google Books
+      </h1>
       <form className={styles.searchForm} onSubmit={handleSubmit}>
         <div className={styles.search}>
           <input
             type="search"
             name="search-form"
             id="search-form"
-            value={searchParams.searchString}
             onChange={handleInputChange}
             required
           />
           <button type="submit" className={styles.searchButton}>
-            Search
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 17 17">
+              <path
+                fill="#119da4ff"
+                fill-rule="evenodd"
+                d="M6.11 15.5c-.58.58-2.1.9-2.1-1v-13c0-1.83 1.52-1.58 2.1-1l6.45 6.45c.58.58.58 1.52 0 2.1L6.1 15.5Z"
+              />
+            </svg>
           </button>
         </div>
       </form>

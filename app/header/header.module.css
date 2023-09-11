@@ -1,8 +1,8 @@
 .title {
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 7vh;
   margin-bottom: 5vh;
-  font-size: clamp(2em, 10vw, 3em);
+  font-size: clamp(1.4em, 6vw, 3em);
   color: var(--text-accent-color);
   font-family: var(--title-font);
 }
@@ -26,11 +26,27 @@
 }
 
 .search input:focus {
-  margin-top: 4vh;
   outline: none;
   border-left: none;
   border-right: none;
   border-top: none;
   border-width: 4px;
-  /* transform: scale(1.01); */
+  transform: scale(1.01);
+}
+
+.searchButton {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 4em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.5s;
+
+}
+
+.searchButton:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }

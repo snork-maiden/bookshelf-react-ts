@@ -6,7 +6,10 @@ import { BookData } from "@/utils/googleBooks/interfaces";
 import Loading from "../loading";
 import parse from "html-react-parser";
 import sanitizeHtml from "sanitize-html";
-
+import { Playfair_Display } from "next/font/google";
+const playfairDisplay = Playfair_Display({
+  subsets: ["cyrillic", "latin", "latin-ext", "vietnamese"],
+});
 export default function Page({ params }: { params: { id: string } }) {
   const [book, setBook] = useState<BookData | null>(null);
 
@@ -20,9 +23,6 @@ export default function Page({ params }: { params: { id: string } }) {
   }, [params.id]);
   function findImageURL(book: BookData) {
     return (
-      // book.volumeInfo?.imageLinks?.large ||
-      // book.volumeInfo?.imageLinks?.medium ||
-      // book.volumeInfo?.imageLinks?.small ||
       book.volumeInfo?.imageLinks?.thumbnail ||
       book.volumeInfo?.imageLinks?.smallThumbnail
     );
@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { id: string } }) {
   function clearDescription(dirtyDescription: string | undefined): any {
     let regexForHTML = /<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)<\/\1>/g;
     if (!dirtyDescription?.match(regexForHTML)) {
-      return <p className={styles.author}>{dirtyDescription}</p>;
+      return <p>{dirtyDescription}</p>;
     }
     return parse(sanitizeHtml(dirtyDescription));
   }
@@ -39,6 +39,13 @@ export default function Page({ params }: { params: { id: string } }) {
     <>
       {book && (
         <article className={styles.book}>
+          {book.volumeInfo.categories?.length > 0 && (
+            <div className={styles.categories}>
+              {book.volumeInfo.categories.map((category, index) => (
+                <span className={styles.category} key={index}>{category}</span>
+              ))}
+            </div>
+          )}
           {findImageURL(book) && (
             <img
               src={findImageURL(book)}
@@ -46,18 +53,17 @@ export default function Page({ params }: { params: { id: string } }) {
               className={styles.cover}
             />
           )}
-          {book.volumeInfo.categories?.length > 0 && (
-            <p className={styles.category}>
-              {book.volumeInfo.categories.join(", ")}
-            </p>
-          )}
-          <h2 className={styles.title}>{book.volumeInfo.title}</h2>
+          <h2 className={styles.title + " " + playfairDisplay.className}>
+            {book.volumeInfo.title}
+          </h2>
           {(book.volumeInfo.authors?.length || 0) > 0 && (
             <p className={styles.author}>
               {book.volumeInfo.authors.join(", ")}
             </p>
           )}
-          {clearDescription(book.volumeInfo.description)}
+          <div className={styles.description}>
+            {clearDescription(book.volumeInfo.description)}
+          </div>
         </article>
       )}
       {!book && <Loading></Loading>}

@@ -12,7 +12,7 @@ export default function SearchFilter({
   onChange,
 }: SearchFilterProps) {
   return (
-    <label className={styles.selectLabel}>
+    <label className={styles.label}>
       {label}
       <select
         name={label}
@@ -21,7 +21,7 @@ export default function SearchFilter({
         onChange={(e) => onChange(e.target.value)}
         defaultValue={options[0]}
       >
-        {options.map((option, index) => (
+        {options.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>

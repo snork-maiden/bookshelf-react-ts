@@ -21,7 +21,7 @@ export default observer(function BooksList() {
           </li>
         ))}
       </ul>
-      {ifLoadMore && <button onClick={handleChange}>Load more</button>}
+      {ifLoadMore && <button onClick={handleChange} className={styles.button}>Load more</button>}
     </>
   );
 });

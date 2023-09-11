@@ -18,12 +18,9 @@
 .titleWrapper {
   overflow: hidden;
   position: relative;
-  height: 5.2em;
+  height: 5.7em;
+  font-size: clamp(20px, 6vw, 1.3em);
 }
-
-/* .titleWrapper h3 {
-  
-} */
 
 .titleWrapper h3::after {
   content: "";
@@ -41,4 +38,12 @@
     rgba(255, 255, 255, 0),
     rgba(255, 255, 255, 1) 70%
   );
+}
+
+.author, .category {
+  color: var(--secondary-text-color);
+}
+
+.author {
+  align-self: end;
 }
