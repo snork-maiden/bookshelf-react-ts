@@ -40,7 +40,8 @@
   );
 }
 
-.author, .category {
+.author,
+.category {
   color: var(--secondary-text-color);
 }
 

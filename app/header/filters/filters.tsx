@@ -4,7 +4,6 @@ import { Categories, OrderByOptions } from "@/utils/googleBooks/interfaces";
 import { FilterState } from "../header";
 import styles from "./filters.module.css";
 
-
 type FiltersProps = {
   onFiltersChange?: (filters: FilterState) => void;
 };
@@ -42,13 +41,13 @@ export default function Filters({ onFiltersChange }: FiltersProps) {
       <SearchFilter
         label="Categories"
         options={categoryOptions}
-        onChange={(value:string) => handleFilterChange('category', value)}
+        onChange={(value: string) => handleFilterChange("category", value)}
       />
 
       <SearchFilter
         label="Sort by"
         options={sortByOptions}
-        onChange={(value:string) => handleFilterChange('orderBy', value)}
+        onChange={(value: string) => handleFilterChange("orderBy", value)}
       />
     </div>
   );

@@ -12,11 +12,17 @@ const playfairDisplay = Playfair_Display({
 });
 export default function Page({ params }: { params: { id: string } }) {
   const [book, setBook] = useState<BookData | null>(null);
-
+  const [error, setError] = useState<boolean>(false);
   useEffect(() => {
     async function fetchData() {
-      const fetchedBook = await fetchGoogleBooksById(params.id);
-      setBook(fetchedBook);
+      setError(false);
+
+      try {
+        const fetchedBook = await fetchGoogleBooksById(params.id);
+        setBook(fetchedBook);
+      } catch (err) {
+        setError(true);
+      }
     }
 
     fetchData();
@@ -37,12 +43,21 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
+      {error && (
+        <p>
+          Oops! Download failed.
+          <br />
+          Please try again later
+        </p>
+      )}
       {book && (
         <article className={styles.book}>
           {book.volumeInfo.categories?.length > 0 && (
             <div className={styles.categories}>
               {book.volumeInfo.categories.map((category, index) => (
-                <span className={styles.category} key={index}>{category}</span>
+                <span className={styles.category} key={index}>
+                  {category}
+                </span>
               ))}
             </div>
           )}

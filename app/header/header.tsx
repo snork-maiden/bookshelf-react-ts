@@ -21,6 +21,7 @@ export interface FilterState {
 
 export default function Header() {
   let searchString = "";
+  const [error, setError] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useState<SearchParams>({
     category: "all",
     orderBy: "relevance",
@@ -29,10 +30,15 @@ export default function Header() {
   });
   useEffect(() => {
     async function searchBooks(): Promise<void> {
+      setError(false);
       if (!searchParams.searchString) return;
-      let data = await searchGoogleBooks(searchParams);
-      bookStore.setBooks(data);
-      searchParamsStore.setParams(searchParams);
+      try {
+        let data = await searchGoogleBooks(searchParams);
+        bookStore.setBooks(data);
+        searchParamsStore.setParams(searchParams);
+      } catch (error) {
+        setError(true);
+      }
     }
     searchBooks();
   }, [searchParams]);
@@ -76,6 +82,13 @@ export default function Header() {
         </div>
       </form>
       <Filters onFiltersChange={handleFiltersChange} />
+      {error && (
+        <p>
+          Oops! Download failed.
+          <br />
+          Please try again later
+        </p>
+      )}
     </header>
   );
 }
