@@ -1,4 +1,4 @@
-# React Book Finder with Google Books API using Next.js and Mobx
+# Book Finder with Google Books API using React.js, Next.js and Mobx
 
 ---
 
