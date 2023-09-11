@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 const Home = observer(function Home() {
   return (
     <>
-      <h2 className={styles.visuallyHidden}>Search results</h2>
+      <h2 className='visually-hidden'>Search results</h2>
       {bookStore.booksAmount !== null && (
         <p className={styles.searchResults}>
           Found {bookStore.booksAmount} results

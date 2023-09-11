@@ -1,24 +1,17 @@
-@keyframes preloader {
-  0% {
-    transform: rotate(0deg) scale(0.8);
-  }
-
-  50% {
-    transform: rotate(360deg) scale(1.2);
-  }
-
-  100% {
-    transform: rotate(720deg) scale(0.8);
-  }
+.booksList {
+  display: flex;
+  gap: min(5vw, 50px);
+  padding: 20px;
+  max-width: 1300px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.loadingRing {
-  animation: 3s infinite linear preloader;
-  width: 100px;
-  height: 100px;
-  background-color: transparent;
-  border: 10px solid var(--accent-color);
-  border-radius: 50%;
-  border-left-color: transparent;
-  margin-top: 20vh;
+.bookItem {
+  flex-grow: 1;
+  flex-basis: 300px;
+  max-width: 350px;
+  padding: 10px;
+  border-top: 3px solid var(--accent-color);
 }
+

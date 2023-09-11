@@ -48,18 +48,19 @@ export default function Header() {
     <header className={styles.header}>
       <h1 className={styles.title}>Search for books in Google Books</h1>
       <form className={styles.searchForm} onSubmit={handleSubmit}>
-        <input
-          type="search"
-          name="search-form"
-          id="search-form"
-          className={styles.search}
-          value={searchParams.searchString}
-          onChange={handleInputChange}
-          required
-        />
-        <button type="submit" className={styles.searchButton}>
-          Search
-        </button>
+        <div className={styles.search}>
+          <input
+            type="search"
+            name="search-form"
+            id="search-form"
+            value={searchParams.searchString}
+            onChange={handleInputChange}
+            required
+          />
+          <button type="submit" className={styles.searchButton}>
+            Search
+          </button>
+        </div>
       </form>
       <Filters onFiltersChange={handleFiltersChange} />
     </header>

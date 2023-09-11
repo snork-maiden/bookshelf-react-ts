@@ -2,9 +2,10 @@ import bookStore from "@/stores/bookStore";
 import BookCard from "./bookCard/bookCard";
 import styles from "./booksList.module.css";
 import searchParamsStore from "@/stores/searchParamsStore";
-import { searchGoogleBooks } from "@/utils/googleBooks";
+import {searchGoogleBooks} from "@/utils/googleBooks";
+import { observer } from "mobx-react-lite";
 
-export default function BooksList() {
+export default observer(function BooksList() {
   const ifLoadMore = bookStore.booksAmount || 0 > bookStore.booksList.length;
   async function handleChange() {
     searchParamsStore.increasePageNumber();
@@ -14,7 +15,7 @@ export default function BooksList() {
   return (
     <>
       <ul className={styles.booksList}>
-        {bookStore.booksList.map((book, index) => (
+        {bookStore.books?.items.map((book, index) => (
           <li key={index} className={styles.bookItem}>
             <BookCard bookData={book} />
           </li>
@@ -23,4 +24,4 @@ export default function BooksList() {
       {ifLoadMore && <button onClick={handleChange}>Load more</button>}
     </>
   );
-}
+});

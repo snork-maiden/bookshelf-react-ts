@@ -2,6 +2,8 @@ import { useState } from "react";
 import SearchFilter from "./searchFilter/searchFilter";
 import { Categories, OrderByOptions } from "@/utils/googleBooks/interfaces";
 import { FilterState } from "../header";
+import styles from "./filters.module.css";
+
 
 type FiltersProps = {
   onFiltersChange?: (filters: FilterState) => void;
@@ -36,7 +38,7 @@ export default function Filters({ onFiltersChange }: FiltersProps) {
   };
 
   return (
-    <>
+    <div className={styles.filters}>
       <SearchFilter
         label="Categories"
         options={categoryOptions}
@@ -48,6 +50,6 @@ export default function Filters({ onFiltersChange }: FiltersProps) {
         options={sortByOptions}
         onChange={(value:string) => handleFilterChange('orderBy', value)}
       />
-    </>
+    </div>
   );
 }
