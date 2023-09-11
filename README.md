@@ -1,10 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Book Finder with Google Books API using Next.js and Mobx
 
-## Getting Started
+---
 
-First, run the development server:
+## Stack:
 
-```bash
+- **Next.js 13**
+- **Mobx 6**
+- **React 18**
+- **TypeScript 5.2**
+- **sanitize-html**: A library to sanitize and parse HTML input to avoid XSS attacks.
+
+---
+
+## API Key Configuration:
+
+Please note that you will need to provide your Google Books API key for the application to work. Follow the Google Books API documentation link provided in the task for more information on obtaining the key.
+
+Once you have it, copy `.env.local.example` to `.env.local` and set key.
+
+---
+
+## How to run the application using Docker:
+
+1. Build the Docker image:
+
+```
+docker build -t bookshelf-react-ts .
+```
+
+2. Run the Docker container:
+
+```
+docker run -p 3000:3000 bookshelf-react-ts
+```
+
+3. Open http://localhost:3000 with your browser to see the result.
+
+---
+
+## How to run development server:
+
+1. Install dependencies
+
+```
+npm ci
+```
+
+2. Run server.
+
+```
 npm run dev
 # or
 yarn dev
@@ -12,23 +56,8 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### License:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is open-source and available under the MIT License.
