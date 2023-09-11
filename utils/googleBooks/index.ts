@@ -1,17 +1,18 @@
-import {
-  BookData,
-  BooksList,
-  SearchParams
-} from "./interfaces";
+import { BookData, BooksList, SearchParams } from "./interfaces";
 
-const API_KEY = "AIzaSyAMtsurQidIdtm_sNnKpVeD1z5mNafzmFA";
+console.log(process.env);
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
 const maxResults = "30";
 
-export async function searchGoogleBooks(searchParams: SearchParams): Promise<BooksList> {
+export async function searchGoogleBooks(
+  searchParams: SearchParams
+): Promise<BooksList> {
   const baseUrl = "https://www.googleapis.com/books/v1/volumes";
   const startIndex = (+maxResults * searchParams.page).toString();
   const searchSting =
-      searchParams.category === "all" ? searchParams.searchString : `${searchParams.searchString}+subject:${searchParams.category}`;
+    searchParams.category === "all"
+      ? searchParams.searchString
+      : `${searchParams.searchString}+subject:${searchParams.category}`;
 
   const params = new URLSearchParams({
     q: searchSting,

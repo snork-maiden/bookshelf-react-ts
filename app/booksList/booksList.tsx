@@ -5,6 +5,7 @@ import searchParamsStore from "@/stores/searchParamsStore";
 import { searchGoogleBooks } from "@/utils/googleBooks";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import GoogleApiError from "@/app/googleApiError/googleApiError";
 
 export default observer(function BooksList() {
   const [error, setError] = useState<boolean>(false);
@@ -35,13 +36,7 @@ export default observer(function BooksList() {
           Load more
         </button>
       )}
-      {error && (
-        <p>
-          Oops! Download failed.
-          <br />
-          Please try again later
-        </p>
-      )}
+      {error && <GoogleApiError />}
     </>
   );
 });

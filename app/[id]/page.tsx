@@ -7,6 +7,7 @@ import Loading from "../loading";
 import parse from "html-react-parser";
 import sanitizeHtml from "sanitize-html";
 import { Playfair_Display } from "next/font/google";
+import GoogleApiError from "@/app/googleApiError/googleApiError";
 const playfairDisplay = Playfair_Display({
   subsets: ["cyrillic", "latin", "latin-ext", "vietnamese"],
 });
@@ -43,13 +44,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      {error && (
-        <p>
-          Oops! Download failed.
-          <br />
-          Please try again later
-        </p>
-      )}
+      {error && <GoogleApiError />}
       {book && (
         <article className={styles.book}>
           {book.volumeInfo.categories?.length > 0 && (
@@ -81,7 +76,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
         </article>
       )}
-      {!book && <Loading></Loading>}
+      {!book && !error && <Loading></Loading>}
     </>
   );
 }

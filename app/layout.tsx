@@ -1,4 +1,3 @@
-"use client";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";

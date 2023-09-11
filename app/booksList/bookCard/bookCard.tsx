@@ -29,7 +29,7 @@ export default function BookCard({ bookData }: { bookData: BookData }) {
           </p>
         )}
         <div className={styles.titleWrapper}>
-          <h3 className={styles.title + " " + playfairDisplay.className}>
+          <h3 className={playfairDisplay.className}>
             {bookData.volumeInfo.title}
           </h3>
         </div>
